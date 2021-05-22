@@ -18,7 +18,7 @@ RUN apt-get update ; DEBIAN_FRONTEND=noninteractive apt-get install -yq -o Dpkg:
     python-daemon python-smbus wget flex bison pkg-config libasound2-dev ; apt-get clean
 
 # similar to above, do this once and Docker can cache the intermediary
-ADD SD/buildVLC.sh /root/buildVLC.sh
+ADD fpp/SD/buildVLC.sh /root/buildVLC.sh
 RUN ( yes | /root/buildVLC.sh ) || true
 
 
@@ -27,8 +27,8 @@ RUN ( yes | /root/buildVLC.sh ) || true
 # directory
 ARG EXTRA_INSTALL_FLAG=
 
-ADD ./ /opt/fpp/
-ADD SD/FPP_Install.sh /root/FPP_Install.sh
+ADD ./fpp /opt/fpp/
+ADD fpp/SD/FPP_Install.sh /root/FPP_Install.sh
 RUN ( yes | /root/FPP_Install.sh $EXTRA_INSTALL_FLAG --skip-apt-install --skip-vlc ) || true
 
 # this will do additional updates and create the required directories
