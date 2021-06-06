@@ -52,7 +52,8 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           
-      - run: |         
+      - run: |     
+          chmod +x "${GITHUB_WORKSPACE}/build-image.sh"
           # run script
           "${GITHUB_WORKSPACE}/build-image.sh"
 
