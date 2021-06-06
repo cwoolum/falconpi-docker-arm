@@ -57,5 +57,5 @@ jobs:
       - name: Run Buildx (push image)      
         if: success()      
         run: |        
-          docker buildx build --platform ${{ steps.prepare.outputs.docker_platform }} --from-cache cwoolum/falconpi-arm --tag ${{ steps.prepare.outputs.docker_image }}:${{ steps.prepare.outputs.version }} --file ./Dockerfile --push .
+          docker buildx build --platform ${{ steps.prepare.outputs.docker_platform }} --cache-from cwoolum/falconpi-arm --tag ${{ steps.prepare.outputs.docker_image }}:${{ steps.prepare.outputs.version }} --file ./Dockerfile --push .
         
