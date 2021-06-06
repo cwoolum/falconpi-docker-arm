@@ -27,16 +27,17 @@ RUN ( yes | /root/buildVLC.sh ) || true
 # directory
 ARG EXTRA_INSTALL_FLAG=
 
-ADD ./fpp /opt/fpp/
+ADD fpp /opt/fpp/
+RUN ls /opt/fpp
 ADD fpp/SD/FPP_Install.sh /root/FPP_Install.sh
 RUN ( yes | /root/FPP_Install.sh $EXTRA_INSTALL_FLAG --skip-apt-install --skip-vlc ) || true
 
-# this will do additional updates and create the required directories
-# and set permissions
+# # this will do additional updates and create the required directories
+# # and set permissions
 RUN /opt/fpp/scripts/init_pre_network
 
-VOLUME /home/fpp/media
+# VOLUME /home/fpp/media
 
-#      HTTP  DDP      e1.31    Multisync  FPPD/HTTP    Other
-EXPOSE 80    4048/udp 5568/udp 32320/udp    32322      9000/udp 9000/tcp
-ENTRYPOINT ["/opt/fpp/Docker/runDocker.sh"]
+# #      HTTP  DDP      e1.31    Multisync  FPPD/HTTP    Other
+# EXPOSE 80    4048/udp 5568/udp 32320/udp    32322      9000/udp 9000/tcp
+# ENTRYPOINT ["/opt/fpp/Docker/runDocker.sh"]
