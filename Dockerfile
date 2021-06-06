@@ -36,8 +36,8 @@ RUN ( yes | /root/FPP_Install.sh $EXTRA_INSTALL_FLAG --skip-apt-install --skip-v
 # # and set permissions
 RUN /opt/fpp/scripts/init_pre_network
 
-# VOLUME /home/fpp/media
+VOLUME /home/fpp/media
 
-# #      HTTP  DDP      e1.31    Multisync  FPPD/HTTP    Other
-# EXPOSE 80    4048/udp 5568/udp 32320/udp    32322      9000/udp 9000/tcp
-# ENTRYPOINT ["/opt/fpp/Docker/runDocker.sh"]
+#      HTTP  DDP      e1.31    Multisync  FPPD/HTTP    Other
+EXPOSE 80    4048/udp 5568/udp 32320/udp    32322      9000/udp 9000/tcp
+ENTRYPOINT ["/opt/fpp/Docker/runDocker.sh"]
