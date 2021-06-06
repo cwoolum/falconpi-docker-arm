@@ -15,10 +15,7 @@ on:
   pull_request:
     branches: [ main ]
 
-env:
-  # Use docker.io for Docker Hub if empty
-  REGISTRY: ghcr.io
-  # github.repository as <account>/<repo>
+env:  
   DOCKER_IMAGE: ${{ github.repository }}
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}  
@@ -49,7 +46,7 @@ jobs:
         id: prepare      
         run: |        
           echo ::set-output name=docker_platform::${DOCKER_TARGET_PLATFORM}        
-          echo ::set-output name=docker_image::${DOCKER_REGISTRY}/${DOCKER_IMAGE}        
+          echo ::set-output name=docker_image::cwoolum/falconpi-arm     
           echo ::set-output name=version::${GITHUB_RUN_NUMBER}
 
       - name: Docker Login      
