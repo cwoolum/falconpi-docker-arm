@@ -7,9 +7,29 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
+    - port: {{ .Values.service.http.port }}
       targetPort: http
       protocol: TCP
       name: http
+    - port: {{ .Values.service.ddp.port }}
+      targetPort: http
+      protocol: UDP
+      name: ddp
+    - port: {{ .Values.service.e131.port }}
+      targetPort: http
+      protocol: UDP
+      name: e131
+    - port: {{ .Values.service.multisync.port }}
+      targetPort: http
+      protocol: UDP
+      name: multisync
+    - port: {{ .Values.service.fppd.port }}
+      targetPort: http
+      protocol: TCP
+      name: fppd
+    - port: {{ .Values.service.other.port }}
+      targetPort: http
+      protocol: TCP
+      name: other
   selector:
     {{- include "falconpi.selectorLabels" . | nindent 4 }}

@@ -35,7 +35,22 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: {{ .Values.service.http.port }}
+              protocol: TCP
+            - name: ddp
+              containerPort: {{ .Values.service.ddp.port }}
+              protocol: UDP
+            - name: e131
+              containerPort: {{ .Values.service.e131.port }}
+              protocol: UDP
+            - name: multisync
+              containerPort: {{ .Values.service.multisync.port }}
+              protocol: UDP
+            - name: fppd
+              containerPort: {{ .Values.service.fppd.port }}
+              protocol: TCP
+            - name: other
+              containerPort: {{ .Values.service.other.port }}
               protocol: TCP
           livenessProbe:
             httpGet:

@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: cwoolum/falconpi-arm
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: 17
 
 imagePullSecrets: []
 nameOverride: ""
@@ -37,8 +37,24 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: ClusterIP
-  port: 80
+  http:
+    type: ClusterIP
+    port: 80
+  ddp:
+    type: ClusterIP
+    port: 4048
+  e131:
+    type: ClusterIP
+    port: 5568
+  multisync:
+    type: ClusterIP
+    port: 32320
+  fppd:
+    type: ClusterIP
+    port: 32322
+  other:
+    type: ClusterIP
+    port: 9000
 
 ingress:
   enabled: false
