@@ -4,10 +4,8 @@ metadata:
   name: {{ include "falconpi.fullname" . }}
   labels:
     {{- include "falconpi.labels" . | nindent 4 }}
-spec:
-  {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
-  {{- end }}
+spec: 
+  replicas: {{ .Values.replicaCount }} 
   selector:
     matchLabels:
       {{- include "falconpi.selectorLabels" . | nindent 6 }}
@@ -62,6 +60,18 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: media
+              mountPath: /home/fpp/media
+            
+      volumes:
+      - name: data
+      {{- if .Values.persistence.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ include "falconpi.fullname" . }}
+      {{- else }}
+        emptyDir: {}
+      {{- end -}} 
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
