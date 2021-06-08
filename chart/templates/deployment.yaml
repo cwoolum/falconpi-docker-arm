@@ -65,7 +65,7 @@ spec:
               mountPath: /home/fpp/media
             
       volumes:
-      - name: data
+      - name: media
       {{- if .Values.persistence.enabled }}
         persistentVolumeClaim:
           claimName: {{ include "falconpi.fullname" . }}
