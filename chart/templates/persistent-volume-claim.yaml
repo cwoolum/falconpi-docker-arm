@@ -10,16 +10,4 @@ spec:
       storage: 10Gi
   accessModes:
     - ReadWriteOnce
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: {{ include "falconpi.fullname" . }}-settings
-  labels: {{- include "falconpi.labels" . | nindent 4 }}
-spec:
-  resources:
-    requests:
-      storage: 1Gi
-  accessModes:
-    - ReadWriteOnce
 {{- end }}

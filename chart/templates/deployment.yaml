@@ -63,8 +63,6 @@ spec:
           volumeMounts:
             - name: media
               mountPath: /home/fpp/media
-            - name: settings
-              mountPath: /home/fpp/media/settings
             
       volumes:
         - name: media
@@ -74,13 +72,7 @@ spec:
         {{- else }}
           emptyDir: {}
         {{- end }}
-        - name: settings
-        {{- if .Values.persistence.enabled }}
-          persistentVolumeClaim:
-            claimName: {{ include "falconpi.fullname" . }}-settings
-        {{- else }}
-          emptyDir: {}
-        {{- end }}
+        
         
       {{- with .Values.nodeSelector }}
       nodeSelector:

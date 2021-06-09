@@ -1,5 +1,7 @@
 FROM debian:buster
 
+ENV CCACHE_DIR=/ccache
+
 # if we get a bunch of these installed up front in one shot (assume a desktop so plenty of memory to do all at once)
 # then the FPP_Install step is faster.   In addition, docker will cache this result
 # so building docker containers will be faster
@@ -30,7 +32,7 @@ ARG EXTRA_INSTALL_FLAG=
 ADD fpp /opt/fpp/
 RUN ls /opt/fpp
 ADD fpp/SD/FPP_Install.sh /root/FPP_Install.sh
-RUN ( yes | /root/FPP_Install.sh $EXTRA_INSTALL_FLAG --skip-apt-install --skip-vlc ) || true
+RUN --mount=type=cache,source=~/cache,target=/ccache/ ( yes | /root/FPP_Install.sh $EXTRA_INSTALL_FLAG --skip-apt-install --skip-vlc ) || true
 
 # # this will do additional updates and create the required directories
 # # and set permissions

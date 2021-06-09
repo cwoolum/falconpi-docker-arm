@@ -36,6 +36,14 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Cache multiple paths
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/cache
+            !~/cache/exclude
+          key: ${{ runner.os }}
+
       - name: Set up Docker Buildx      
         uses: crazy-max/ghaction-docker-buildx@v1      
         with:        
