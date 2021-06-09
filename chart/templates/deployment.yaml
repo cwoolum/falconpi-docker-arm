@@ -67,20 +67,21 @@ spec:
               mountPath: /home/fpp/media/settings
             
       volumes:
-      - name: media
-      {{- if .Values.persistence.enabled }}
-        persistentVolumeClaim:
-          claimName: {{ include "falconpi.fullname" . }}-media
-      {{- else }}
-        emptyDir: {}
-      {{- end -}} 
-      - name: settings
-      {{- if .Values.persistence.enabled }}
-        persistentVolumeClaim:
-          claimName: {{ include "falconpi.fullname" . }}-settings
-      {{- else }}
-        emptyDir: {}
-      {{- end -}} 
+        - name: media
+        {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ include "falconpi.fullname" . }}-media
+        {{- else }}
+          emptyDir: {}
+        {{- end }}
+        - name: settings
+        {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ include "falconpi.fullname" . }}-settings
+        {{- else }}
+          emptyDir: {}
+        {{- end }}
+        
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
